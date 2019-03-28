@@ -169,12 +169,11 @@ class Database:
         """
         try:
             self.log.debug("Updating SN Database: %s", note)
-
             self.db.execute('INSERT OR REPLACE INTO Simplenote \
-                (key, createdate, deleted, minversion, modifydate, syncnum, systemtags, tags, version) \
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)', (\
+                (key, createdate, deleted, modifydate, systemtags, tags, version) \
+                VALUES (?, ?, ?, ?, ?, ?, ?)', (\
                 note['key'],note['createdate'],note['deleted'],\
-                note['minversion'],note['modifydate'],note['syncnum'],\
+                note['modifydate'],\
                 json.dumps(note['systemtags']),json.dumps(note['tags']),note['version'],)\
                 )
             return True

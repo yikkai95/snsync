@@ -240,11 +240,10 @@ def main(argv=sys.argv[1:]):
             if thisfile and n['deleted'] == 0: # Modified S-Notes
                 if os.path.isfile(path + "/" + thisfile['filename']):
                     file_modifydate = os.path.getmtime(path + "/" + thisfile['filename'])
-
-                    sn_modifyseconds = n['modifydate'].split(".")[0] # Simple Note Modify Time
+                    sn_modifyseconds = str(n['modifydate']).split(".")[0] # Simple Note Modify Time
                     logger.debug('SN Modified: %s [%s]', sn_modifyseconds, time.ctime(int(sn_modifyseconds)))
 
-                    sncache_modifyseconds = thisnote['modifydate'].split(".")[0] # Last known Simple Note Time
+                    sncache_modifyseconds = str( thisnote['modifydate'] ).split(".")[0] # Last known Simple Note Time
                     logger.debug('SN (cached) Modified: %s [%s]', sncache_modifyseconds, time.ctime(int(sncache_modifyseconds)))
 
                     nf_modifyseconds = str(file_modifydate).split(".")[0] # Note File modify Time
@@ -442,7 +441,6 @@ def main(argv=sys.argv[1:]):
         sys.stdout.write("\b" * (len(os.listdir(path))+1)) # return to start of line, after '['
 
     for notefile in os.listdir(path): # local search for new files
-
         if not silent_mode:
             if not silent_mode:
                 time.sleep(0.05) # print doesn't work if too fast
